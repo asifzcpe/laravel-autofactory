@@ -13,13 +13,14 @@ class GenerateFactoryCommand extends Command
 {
     protected $signature = 'make:autofactory {model}';
     protected $description = 'Generate a factory for a model';
-    protected $modelNamespace = 'App\\Models\\';
+    protected $modelNamespace;
 
     public function __construct(
         private FactoryGenerator $factoryGenerator,
         private DummyDataGenerator $dummyDataGenerator
     ) {
         parent::__construct();
+        $this->modelNamespace = env('AUTOFACTORY_MODEL_NAMESPACE', 'App\\Models\\');
     }
 
     public function handle(QuestionHelper $helper)
