@@ -1,0 +1,23 @@
+<?php
+
+namespace Database\Factories;
+
+use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+/**
+ * Define the model's default state.
+ *
+ * @return array<string, mixed>
+ */
+class {{ modelName }}Factory extends Factory
+{
+    protected $model = \App\Models\{{ modelName }}::class;
+
+    public function definition(): array
+    {
+        return [
+            {{ fields }}
+        ];
+    }
+}

@@ -1,0 +1,24 @@
+{
+    "name": "asif/autofactory",
+    "description": "A Laravel package to automatically generate factories based on model columns",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Asif\\AutoFactory\\": "src/"
+        }
+    },
+    "require": {
+        "php": "^7.4|^8.0",
+        "illuminate/support": "^8.0|^9.0|^10.0|^11.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.0"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Asif\\AutoFactory\\Providers\\AutoFactoryServiceProvider"
+            ]
+        }
+    }
+}
