@@ -3,19 +3,33 @@
 namespace Asif\AutoFactory\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Asif\AutoFactory\Commands\GenerateFactoryCommand;
+use Asif\AutoFactory\Console\Commands\GenerateFactoryCommand;
+use Asif\AutoFactory\Contracts\FieldMapperInterface;
+use Asif\AutoFactory\Services\FakerFieldMapper;
+use DB;
+use Log;
 
 class AutoFactoryServiceProvider extends ServiceProvider
 {
     public function register()
     {
-        $this->commands([
-            GenerateFactoryCommand::class,
-        ]);
+        $this->app->bind(FieldMapperInterface::class, FakerFieldMapper::class);
     }
 
     public function boot()
     {
-        // You can add any boot-related logic here if needed
+        if ($this->app->runningInConsole()) {
+            DB::listen(function ($query) {
+                Log::info(
+                    $query->sql,
+                    $query->bindings,
+                    $query->time
+                );
+            });
+
+            $this->commands([
+                GenerateFactoryCommand::class,
+            ]);
+        }
     }
 }
